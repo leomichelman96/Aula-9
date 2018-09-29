@@ -1,6 +1,6 @@
 
 
-#Aula 9 - DiagnÃ³sticos de ResÃ­duos 2
+#Aula 9 - Diagnósticos de Resíduos 2
 install.packages("lmtest")
 install.packages("aTSA")
 library(lmtest)
@@ -13,32 +13,26 @@ library(readxl)
 
 data(jocci)                                                       #Department of commerce commodity price index - USA
 View(jocci)
-JOCCI <- as.data.frame(jocci)                                     #Y Ã© o Index Jocci . dy Ã© a variaÃ§Ã£o (expressa pela diferenÃ§a) em logaritmos.
+JOCCI <- as.data.frame(jocci)                                     #Y é o Index Jocci . dy é a variação (expressa pela diferença) em logaritmos.
 joccits <- ts(JOCCI$dy,start = 1959,frequency = 12)
-plot(joccits, main="Ãndice Jocci", xlab="Ano", ylab="Indice")
+plot(joccits, main="Índice Jocci", xlab="Ano", ylab="Indice")
 
 #Definindo Formato dos Modelos
 ar6model <- dy~dy1+dy2+dy3+dy4+dy5+dy6
-ar5model <- dy~dy1+dy2+dy3+dy4+dy5
-ar4model <- dy~dy1+dy2+dy3+dy4
-ar3model <- dy~dy1+dy2+dy3
-ar2model <- dy~dy1+dy2
-ar1model <- dy~dy1
+ar5model 
+ar4model 
+ar3model 
+ar2model 
+ar1model 
 
-ar6model <- as.data.frame(jocci)
-ar5model <- as.data.frame(jocci)
-ar4model <- as.data.frame(jocci)
-ar3model <- as.data.frame(jocci)
-ar2model <- as.data.frame(jocci)
-ar1model <- as.data.frame(jocci)
 #Executando os Teste LM-Breuch-Godfrey
 
-TesteBGAR6 <- bgtest(ar6model,data=jocci)
-TesteBGAR5 <- bgtest(ar5model,data=jocci)
-TesteBGAR4 <- bgtest(ar4model,data=jocci)
-TesteBGAR3 <- bgtest(ar3model,data=jocci)
-TesteBGAR2 <- bgtest(ar2model,data=jocci)
-TesteBGAR1 <- bgtest(ar1model,data=jocci)
+TesteBGAR6 <- bgtest(ar6model,data=JOCCI)
+TesteBGAR5 <- bgtest(ar5model,data=JOCCI)
+TesteBGAR4 <- bgtest(ar4model,data=JOCCI)
+TesteBGAR3 <- bgtest(ar3model,data=JOCCI)
+TesteBGAR2 <- bgtest(ar2model,data=JOCCI)
+TesteBGAR1 <- bgtest(ar1model,data=JOCCI)
 
 P_Valores_BG <- c(TesteBGAR6$p.value,
                TesteBGAR5$p.value,
@@ -54,7 +48,7 @@ View(Resultados)
 
 
 #Teste Reset
-TesteReset6 <- resettest(ar6model,data=jocci)
+TesteReset6 <- resettest(ar6model,data=JOCCI)
 TesteReset5 
 TesteReset4 
 TesteReset3  
@@ -73,7 +67,7 @@ View(Resultados)
 
 
 #Carregando o arquivo xls
-variacao_PIB <- read.table("c:/Econometria/variacao.xls", header = T)                 #LÃª o arquivo variacao.xls na pasta c:/Econometria
+variacao_PIB <- read.table("c:/Econometria/variacao.xls", header = T)                 #Lê o arquivo variacao.xls na pasta c:/Econometria
 variacao_PIB <- as.data.frame(variacao_PIB[,-1])                                      #Apaga a primeira coluna
 
 
